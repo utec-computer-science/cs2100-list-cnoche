@@ -2,18 +2,30 @@
 #define LIST_LIST_HPP
 
 #include "node.h"
-#include <ostream>
 #include "iterator.hpp"
+#include <ostream>
+#include <random>
+
 template <typename T>
 class List {
     protected:
-        Node<T> *head;
-        Node<T> *tail;
+        Node<T> *head = nullptr;
+        Node<T> *tail = nullptr;
         typedef Node<T> Node;
     public:
-        int len;
+        int len = 0;
         typedef iterator<T> iterator;
-        List(const List<T> &list){head=list.head; tail=list.tail; len = list.len;}
+        List(const List<T> &list){
+          Node * iter = list.head;
+          int cnt = 0;
+          while (iter != nullptr)
+          {
+            push_front(list[cnt]);
+            iter = iter->next;
+            cnt++;
+          }
+          len = cnt;
+        }
         
         List(T* arr, int size){
           for (int i = size; i != -1; i--)
@@ -27,10 +39,7 @@ class List {
           push_front(node->value);
         }
 
-        List(int n){ 
-			//Constructor por parametro, 
-			//retorna un lista de randoms de tamaño n
-        }
+        //List(int n){ }
 
         List(void){head=nullptr; len=0;}
 
@@ -53,7 +62,7 @@ class List {
         // Inserta un elemento al final
         void push_back(const T& element)
         {
-          Node * new_node = new Node{element, nullptr};
+          Node * new_node = new Node(element, nullptr);
           if (head == nullptr)
           {
             head = new_node;
@@ -220,7 +229,16 @@ class List {
 		  // ordena la lista
         List& sort(void);
 		  // invierte la lista
-        List& reverse(void); 
+        List& reverse(void)
+        {
+          List<T> * list_reversed;
+          Node * iterA = head;
+          while (head != nullptr){
+            list_reversed.push_front(tail);
+            pop_back();
+          }
+        return list_reversed;
+        }
 
 		  // Imprime la lista con cout
         template<typename __T>

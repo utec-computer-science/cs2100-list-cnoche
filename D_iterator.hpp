@@ -1,15 +1,15 @@
 #include "node.h"
 template <typename T>
-    class Fiterator {
+    class Diterator {
         private:
-            typedef Node<T> Node;
-            Node * pointer;
+            typedef DNode<T> Node;
+            DNode * pointer;
             
         public:
-            Fiterator():pointer(nullptr) {}
-            Fiterator(Node * ptr): pointer(ptr){}
+            Diterator():pointer(nullptr) {}
+            Diterator(DNode * ptr): pointer(ptr){}
 
-            ~Fiterator(void){}
+            ~Diterator(void){}
             
             T operator * (){
                 return this->pointer->value;
@@ -18,29 +18,32 @@ template <typename T>
             void operator ++(){
                 this->pointer = this->pointer->next;
             }
+            
+            void operator --(){
+                this->pointer = this->pointer->prev;
+            }
 
-            bool operator == (const Fiterator & it){
+            bool operator == (const Diterator & it){
                 return this->pointer == it.pointer;
             }
             
-            bool operator != (const Fiterator & it){
+            bool operator != (const Diterator & it){
                 return this->pointer != it.pointer;
             }
 
-            bool operator <= (const Fiterator & it){
+            bool operator <= (const Diterator & it){
                 return this->pointer <= it.pointer;
             }
     
-            bool operator >= (const Fiterator & it){
+            bool operator >= (const Diterator & it){
                 return this->pointer >= it.pointer;
             }    
-            bool operator > (const Fiterator & it){
+            bool operator > (const Diterator & it){
                 return this->pointer > it.pointer;
             }      
 
-            bool operator < (const Fiterator & it){
+            bool operator < (const Diterator & it){
                 return this->pointer < it.pointer;
             }  
     
     };
-

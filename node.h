@@ -12,13 +12,13 @@ class Node{
 };
 
 template <typename T>
-class SNode{
+class DNode{
     public:
         T value;
-        SNode<T> * next;    
-        SNode<T> * prev;
-        SNode(void){next = nullptr;}
-        SNode(const T& a, const SNode<T> * b, const SNode<T> * c) : value(a), next(b), prev(c) {}
-        ~SNode(void){next = nullptr;}
+        DNode<T> * next;    
+        DNode<T> * prev;
+        DNode(void){next = nullptr;}
+        DNode(const T& a, const DNode<T> * b, const DNode<T> * c) : value(a), next(b), prev(c) {}
+        ~DNode(void){next = nullptr;}
 };
 #endif

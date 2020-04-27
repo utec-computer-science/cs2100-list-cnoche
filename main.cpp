@@ -19,9 +19,15 @@ int main (int, char*[]){
     int arr[5] = {1,2,3,4,5};
     List<int> arrlist(arr, 5);
     List<int>::iterator ait;
+    for (int i = 0; i <= arrlist.len; i++){
+        std::cout << arrlist[i] << " ";
+    }
+    std::cout << "\n";
     arrlist.push_back(6);
-    std::cout << arrlist.len;
-    
+
+    for (int i = 0; i <= arrlist.len; i++){
+        std::cout << arrlist[i] << " ";
+    }
     std::cout << std::endl;
     return 1;
 }

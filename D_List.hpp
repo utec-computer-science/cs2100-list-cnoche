@@ -1,39 +1,39 @@
-#ifndef LIST_S_LIST_HPP
-#define LIST_S_LIST_HPP
+#ifndef LIST_D_LIST_HPP
+#define LIST_D_LIST_HPP
 
 #include "node.h"
 #include <ostream>
 #include "iterator.hpp"
 template <typename T>
-class SList {
+class DList {
     protected:
-        SNode<T> *head;
-        SNode<T> *tail;
-        typedef SNode<T> Node;
+        DNode<T> *head;
+        DNode<T> *tail;
+        typedef DNode<T> Node;
     public:
         int len;
         typedef iterator<T> iterator;
-        SList(const SList<T> &SList){head=SList.head; tail=SList.tail; len = SList.len;}
+        DList(const DList<T> &DList){head=DList.head; tail=DList.tail; len = DList.len;}
         
-        SList(T* arr, int size){
+        DList(T* arr, int size){
           for (int i = size; i != -1; i--)
           {
             push_front(arr[i]);
           }
         }
 
-        SList(Node * node){ 
+        DList(Node * node){ 
           push_front(node->value);
         }
 
-        SList(int n){ 
+        DList(int n){ 
 			//Constructor por parametro, 
-			//retorna un SLista de randoms de tamaño n
+			//retorna un DLista de randoms de tamaño n
         }
 
-        SList(void){head=nullptr; len=0;}
+        DList(void){head=nullptr; len=0;}
 
-        ~SList(void){
+        ~DList(void){
           if (!isEmpty()){pop_front();}
         }
 
@@ -115,7 +115,7 @@ class SList {
           }
         }
         
-      // la SLista esta vacia?
+      // la DLista esta vacia?
         bool isEmpty(void)
         {
           return head==nullptr;
@@ -130,12 +130,12 @@ class SList {
           return iter->value;
         }
       } 
-    // retorna el tamaño de la SLista
+    // retorna el tamaño de la DLista
       unsigned int size(void){
         return len;
       }
 
-    // Elimina toda la SLista
+    // Elimina toda la DLista
       void clear(void)
       {
         if (!isEmpty)
@@ -216,17 +216,24 @@ class SList {
           }
         }
 
-		  // ordena la SLista
-        SList& sort(void); 
+		  // ordena la DLista
+        DList& sort(void);
 
-		  // invierte la SLista
-        SList& reverse(void); 
-
-		  // Imprime la SLista con cout
+        DList& reverse(void){
+            Node * iter = tail; 
+            DList<T> * list_reversed;
+            while (iter != nullptr) { 
+                list_reversed.push_back(iter);
+                iter= iter->prev;
+            } 
+            return list_reversed;
+        }
+        
+		  // Imprime la DLista con cout
         template<typename __T>
         inline friend std::ostream& operator<<
-			  (std::ostream& os , const SList<__T>& SList){
-          Node * iter = SList.head;
+			  (std::ostream& os , const DList<__T>& DList){
+          Node * iter = DList.head;
           while (iter != nullptr)
           {
             os << iter->value << " "; iter = iter->next;
